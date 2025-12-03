@@ -7,4 +7,4 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - MONGO_URI=mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@users.rmpyjrs.mongodb.net/?appName=users
+      - MONGO_URI=mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@users.rmpyjrs.mongodb.net/users?appName=users
