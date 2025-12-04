@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   app:
     image: user-service:latest
@@ -7,4 +5,4 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - MONGO_URI=mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@users.rmpyjrs.mongodb.net/users?appName=users
+      - MONGO_URI=mongodb+srv://nbAdaran:123@users.rmpyjrs.mongodb.net/users?appName=users
