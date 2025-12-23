@@ -2,6 +2,7 @@ package com.prpo.chat.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -14,22 +15,20 @@ public class User {
   @Id
   private String id;
 
-  private String username;
+  @Indexed(unique = true)
   private String email;
+  private String username;
   private String passwordHash;
 
   private Profile profile;
   private Settings settings;
 
   private List<String> friends; // list of user ids
-  private List<String> servers;
-  private List<String> privateServers;
 
   @Data
   public static class Profile {
     private String avatarUrl;
     private String bio;
-    private String location;
     private Date birthdate;
   }
 

@@ -2,6 +2,8 @@ package com.prpo.chat.service;
 
 import com.prpo.chat.entities.User;
 import com.prpo.chat.service.dto.CreateUserRequestDto;
+import com.prpo.chat.service.dtos.RegisterRequestDto;
+import com.prpo.chat.service.dtos.UserDto;
 import com.prpo.chat.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,8 @@ public class UserService {
   @Autowired
   private final UserRepository userRepository;
 
-  public User createUser(final CreateUserRequestDto request) {
+  // TODO: use mappers
+  public UserDto registerUser(final RegisterRequestDto request) {
     if(userRepository.existsByEmail(request.getEmail())) {
       throw new RuntimeException("Email already in use.");
     }
@@ -24,7 +27,7 @@ public class UserService {
     }
 
     // main info
-    final var user = new User();
+    var user = new User();
     user.setUsername(request.getUsername());
     user.setEmail(request.getEmail());
     // TODO: call authentication service
@@ -34,7 +37,6 @@ public class UserService {
     final var profile = new User.Profile();
     user.setProfile(profile);
     profile.setBio("");
-    profile.setLocation(null);
     profile.setBirthdate(null);
     profile.setAvatarUrl("https://example.com/avatar.jpg");
 
@@ -44,11 +46,14 @@ public class UserService {
     settings.setTheme(User.Theme.DARK);
     settings.setNotifications(true);
 
-    //friends, servers, privateServers
+    //friends
     user.setFriends(List.of());
-    user.setServers(List.of());
-    user.setPrivateServers(List.of());
 
-    return userRepository.save(user);
+    user = userRepository.save(user);
+    final var userDto = new UserDto();
+    userDto.setId(user.getId());
+    userDto.setUsername(user.getUsername());
+    userDto.setProfile(user.getProfile());
+    return userDto;
   }
 }
