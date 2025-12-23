@@ -5,4 +5,4 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - MONGO_URI=mongodb+srv://nbAdaran:123@users.rmpyjrs.mongodb.net/users-db?appName=users
+      MONGO_URI: ${MONGO_URI}
