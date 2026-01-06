@@ -48,6 +48,7 @@ public class UserService {
         final var userDto = new UserDto();
         userDto.setId(userId);
         userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
         userDto.setProfile(user.getProfile());
 
         return userDto;
@@ -156,6 +157,7 @@ public class UserService {
         final var userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
         userDto.setProfile(user.getProfile());
         return userDto;
     }
@@ -179,6 +181,7 @@ public class UserService {
 
             userDto.setId(user.getId());
             userDto.setUsername(user.getUsername());
+            userDto.setEmail(user.getEmail());
             userDto.setProfile(user.getProfile());
 
             return userDto;
