@@ -20,6 +20,9 @@ public class User {
   private String username;
   private String passwordHash;
 
+  @Indexed(unique = true, sparse = true)
+  private String walletAddress;
+
   private Profile profile;
   private Settings settings;
 
