@@ -30,7 +30,7 @@ public class UserService {
 
     private final RestTemplate restTemplate;
 
-    private final String ENCRYPTION_SERVICE_URL = "http://encryption:8082/password";
+    private final String ENCRYPTION_SERVICE_URL = System.getenv().getOrDefault("ENCRYPTION_BASE_URL", "http://encryption:8082/password");
 
     private final SearchClient searchClient;
 
@@ -229,6 +229,7 @@ public class UserService {
      */
     private Boolean validatePassword(String password, User user) {
         try {
+            System.out.println(ENCRYPTION_SERVICE_URL);
             final var request = new PasswordHashDto();
             request.setPassword(password);
             request.setHashedPassword(user.getPasswordHash());
